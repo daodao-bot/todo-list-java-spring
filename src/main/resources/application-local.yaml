@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    url: ${H2_URL:jdbc:h2:mem:todo_list}

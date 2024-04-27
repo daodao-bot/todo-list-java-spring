@@ -1,0 +1,42 @@
+name: Action
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      TZ: Asia/Shanghai
+      DOCKER_HUB_NAMESPACE: daodaobot
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      APPLICATION: todo-list-java-spring
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn spring-boot:build-image -Pnative
+
+      - name: Login Docker Hub
+        run: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+
+      - name: Tag the Docker image
+        run: docker tag $APPLICATION:0.0.1 $DOCKER_HUB_NAMESPACE/$APPLICATION:latest
+
+      - name: Push the Docker Image
+        run: docker push $DOCKER_HUB_NAMESPACE/$APPLICATION:latest

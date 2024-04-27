@@ -1,0 +1,13 @@
+server:
+  port: ${SERVER_PORT:80}
+
+spring:
+  application:
+    name: todo-list-java-spring
+
+  jpa:
+    show-sql: true
+
+  datasource:
+    url: ${H2_URL:jdbc:h2:file:/tmp/todo_list}
+    driver-class-name: org.h2.Driver
