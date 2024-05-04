@@ -140,4 +140,13 @@ class TodoControllerTest extends TodoListApplicationTest {
         mockMvc(uri, method, headers, null, null);
     }
 
+    @Test
+    void clear() {
+        String uri = TodoConstant.TODO;
+        HttpMethod method = HttpMethod.DELETE;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        mockMvc(uri, method, headers, null, null);
+    }
+
 }

@@ -34,4 +34,8 @@ public interface TodoApi {
     @DeleteExchange(url = TodoConstant.TODO + "/{id}")
     void del(@PathVariable("id") Long id);
 
+    @Operation(summary = "Clear all todos")
+    @DeleteExchange(url = TodoConstant.TODO)
+    void clear();
+
 }

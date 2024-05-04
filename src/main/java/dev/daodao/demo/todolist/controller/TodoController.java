@@ -39,4 +39,9 @@ public class TodoController implements TodoApi {
         todoService.del(id);
     }
 
+    @Override
+    public void clear() {
+        todoService.clear();
+    }
+
 }

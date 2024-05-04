@@ -44,4 +44,8 @@ public class TodoService {
         todoRepository.deleteById(id);
     }
 
+    public void clear() {
+        todoRepository.deleteAll();
+    }
+
 }
